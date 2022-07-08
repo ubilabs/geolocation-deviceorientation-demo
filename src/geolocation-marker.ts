@@ -10,7 +10,7 @@ const MARKER_SVG = `<?xml version="1.0" encoding="UTF-8" ?>
 export class GeolocationMarker {
   protected overlay: google.maps.OverlayView;
 
-  private rootEl!: HTMLDivElement;
+  protected rootEl!: HTMLDivElement;
   private iconSvgEl!: SVGSVGElement;
   private accuracyIndicator!: HTMLElement;
 
@@ -88,12 +88,13 @@ export class GeolocationMarker {
       border: 1px solid currentColor;
       background: rgba(0,0,0,0.2);
       border-radius: 50%;
-      
     `;
     this.rootEl.appendChild(this.accuracyIndicator);
 
     this.iconSvgEl = this.createIconSvgElement();
-    this.iconSvgEl.style.cssText = `position: absolute; top: 0; left: 0; width: 100%; height: 100%;`;
+    this.iconSvgEl.style.cssText = `
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    `;
 
     this.rootEl.appendChild(this.iconSvgEl);
   }
@@ -129,7 +130,7 @@ export class GeolocationMarker {
     this.updateDomElements();
   }
 
-  private onRemove() {
+  protected onRemove() {
     this.rootEl.remove();
   }
 
