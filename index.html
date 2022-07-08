@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>compass demo</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .info {
+        position: absolute;
+        bottom: 2em;
+        left: 50%;
+        width: 400px;
+        max-width: 80%;
+        padding: 1em 1em 3em;
+        transform: translateX(-50%);
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .info button {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="info">
+      <p>
+        Here's a Button. Once you click it, your device will probably start to
+        ask questions, and I need you to allow all that stuff.
+      </p>
+
+      <p>All data is kept local and will never leave the device.</p>
+
+      <button>Let's go!</button>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
