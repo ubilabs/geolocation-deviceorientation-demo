@@ -1,9 +1,13 @@
 const MARKER_SVG = `<?xml version="1.0" encoding="UTF-8" ?>
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="-16 -16 32 32">
-    <style>.no-heading .heading-arrow { display: none; }</style>
-    <circle r="5" fill="currentColor" />
-    <circle r="6.5" stroke-width="1" stroke="currentColor" fill="none" />
-    <path class="heading-arrow" d="M-3-9l3-5l3,5z" stroke="currentColor" stroke-linejoin="round" />
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="-16 -16 32 32" fill="#5a78fa">
+    <style>
+        .no-heading .heading-arrow {
+            display: none;
+        }
+    </style>
+    <circle r="5" fill="#5a78fa" />
+    <circle r="6.5" stroke-width="1" stroke="#5a78fa" fill="none" />
+    <path class="heading-arrow" d="M-3-9l3-5l3,5z" stroke="#5a78fa" stroke-linejoin="round" />
 </svg>
 `;
 

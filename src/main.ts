@@ -22,7 +22,8 @@ async function main() {
     {
       center: {lat: 53.55, lng: 10},
       zoom: 12,
-      gestureHandling: 'greedy'
+      gestureHandling: 'greedy',
+      mapId: '3fec513989decfcd'
     }
   );
 
