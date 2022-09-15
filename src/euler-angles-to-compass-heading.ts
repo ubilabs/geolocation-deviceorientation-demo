@@ -1,6 +1,9 @@
 const degtorad = Math.PI / 180; // Degree-to-Radian conversion
 
-export function compassHeading(
+/**
+ * Computes the compass-heading from the device-orientation euler-angles.
+ */
+export function eulerAnglesToCompassHeading(
   alpha: number | null,
   beta: number | null,
   gamma: number | null

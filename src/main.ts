@@ -1,79 +1,80 @@
 import {loadMapsApi} from './load-maps-api';
 import {GeolocationMarker} from './geolocation-marker';
-import {compassHeading} from './compass-heading';
+import {GeolocationService} from './geolocation-service';
 
 const infoPanel = document.querySelector('.info') as HTMLElement;
 const button = infoPanel.querySelector('button') as HTMLElement;
+const permissionInfoElements: HTMLElement[] = Array.from(
+  document.querySelectorAll('.permission-info')
+);
 
-declare global {
-  interface DeviceOrientationEvent {
-    webkitCompassAccuracy?: number;
-    webkitCompassHeading?: number;
-  }
-}
+// vite specific way to get environment-variables (supplied via
+// commandline or a .env file)
+const {GOOGLE_MAPS_API_KEY} = import.meta.env;
+
+let mapCenterInitiallyUpdated = false;
 
 async function main() {
-  await loadMapsApi({
-    key: import.meta.env.GOOGLE_MAPS_API_KEY
-  });
+  const mapsApiPromise = loadMapsApi({key: GOOGLE_MAPS_API_KEY});
+  const geolocationService = new GeolocationService();
 
-  const map = new google.maps.Map(
+  await geolocationService.queryPermissionsState();
+  updatePermissionStateDetails(geolocationService.geolocationPermissionState);
+
+  await mapsApiPromise;
+
+  const marker = new GeolocationMarker();
+  const map = await new google.maps.Map(
     document.querySelector('#map') as HTMLElement,
     {
       center: {lat: 53.55, lng: 10},
       zoom: 12,
       gestureHandling: 'greedy',
+      disableDefaultUI: true,
       mapId: '3fec513989decfcd'
     }
   );
 
-  const marker = new GeolocationMarker();
-  marker.setMap(map);
+  // if the permission had previously been granted, we can immediately
+  // start showing the marker
+  if (geolocationService.geolocationPermissionState === 'granted') {
+    marker.setMap(map);
+    geolocationService.start();
+  }
 
-  button.addEventListener('click', () => {
-    infoPanel.style.display = 'none';
+  geolocationService.addEventListener('update', ev => {
+    marker.position = {lat: ev.detail.latitude, lng: ev.detail.longitude};
+    marker.accuracy = ev.detail.accuracy;
+    marker.heading = ev.detail.compassHeading;
 
-    startGeolocationUpdates(marker);
-    startOrientationUpdates(marker);
+    if (!mapCenterInitiallyUpdated) {
+      mapCenterInitiallyUpdated = true;
+
+      map.setCenter(marker.position);
+      map.setZoom(15);
+    }
+  });
+
+  geolocationService.addEventListener('error', ev => {
+    console.log('error occured:', ev.detail);
+    marker.setMap(null);
+    geolocationService.stop();
+  });
+
+  button.addEventListener('click', async () => {
+    await geolocationService.requestPermissions();
+
+    updatePermissionStateDetails(geolocationService.geolocationPermissionState);
+    if (geolocationService.geolocationPermissionState === 'granted') {
+      geolocationService.start();
+      marker.setMap(map);
+    }
   });
 }
 
-function startGeolocationUpdates(marker: GeolocationMarker) {
-  navigator.geolocation.watchPosition(
-    position => {
-      console.log('geolocation', position.coords);
-      marker.position = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      marker.accuracy = position.coords.accuracy;
-    },
-    err => {
-      throw err;
-    },
-    {enableHighAccuracy: true}
-  );
-}
-
-async function startOrientationUpdates(marker: GeolocationMarker) {
-  if ('requestPermission' in DeviceOrientationEvent) {
-    const res = await DeviceOrientationEvent.requestPermission();
-
-    if (res !== 'granted') {
-      throw new Error('failed to get permission');
-    }
-  }
-
-  if ('ondeviceorientationabsolute' in window) {
-    window.addEventListener('deviceorientationabsolute', ev => {
-      marker.heading = compassHeading(ev.alpha, ev.beta, ev.gamma);
-    });
-  } else if ('ondeviceorientation' in window) {
-    window.addEventListener('deviceorientation', ev => {
-      if (ev.webkitCompassHeading) marker.heading = ev.webkitCompassHeading;
-    });
-  } else {
-    throw new Error('no deviceorientation events available');
+function updatePermissionStateDetails(state: PermissionState) {
+  for (let el of permissionInfoElements) {
+    el.style.display = el.dataset.state === state ? '' : 'none';
   }
 }
 

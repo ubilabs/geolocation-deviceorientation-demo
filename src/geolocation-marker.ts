@@ -11,6 +11,9 @@ const MARKER_SVG = `<?xml version="1.0" encoding="UTF-8" ?>
 </svg>
 `;
 
+/**
+ * The marker class handles the rendering of the geolocation-marker.
+ */
 export class GeolocationMarker {
   protected overlay: google.maps.OverlayView;
 

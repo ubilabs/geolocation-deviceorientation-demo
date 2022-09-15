@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <link
       rel="stylesheet"
@@ -48,6 +48,9 @@
         margin: 0 auto;
         margin-top: 1em;
       }
+      p:last-child {
+        margin-bottom: 0;
+      }
       .header {
         font-size: 20px;
         margin-bottom: 1em;
@@ -58,26 +61,72 @@
         height: 18px;
         margin-right: 0.25em;
       }
+
+      .permission-info {
+        margin-left: -1em;
+        margin-right: -1em;
+        margin-bottom: 1em;
+        padding: 1em;
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .privacy-note {
+        color: rgba(0, 0, 0, 0.54);
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
     <div class="wordmark-container">
-      made by <img src="./public/ubi-wordmark.svg" class="ubi-wordmark" />
+      made by <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
     </div>
     <div class="info">
       <h1 class="header">
-        <img class="ubi-logo" src="./public/ubilabs-logo.svg" />Device
+        <img class="ubi-logo" alt="" src="/ubilabs-logo.svg" />Device
         Orientation Demo
       </h1>
       <p>
-        To be able to try out the demo, you need to allow this app to use your
-        location.
+        This demo shows how to use the Geolocation- and DeviceOrientation APIs
+        to display a user's location on a google map.
       </p>
 
-      <p>All data is kept local and will never leave your device.</p>
+      <div
+        class="permission-info permission-info--granted"
+        data-state="granted"
+        style="display: none"
+      >
+        <p>
+          You have granted this page permission to access to your location which
+          will now be shown on the map.
+        </p>
+      </div>
+      <div
+        class="permission-info permission-info--prompt"
+        data-state="prompt"
+        style="display: none"
+      >
+        <p>
+          You haven't yet granted the required permission, or we couldn't check
+          if the permission has been granted. Press the button below to start
+          the process.
+        </p>
+        <button>Let's go!</button>
+      </div>
+      <div
+        class="permission-info permission-info--denied"
+        data-state="denied"
+        style="display: none"
+      >
+        <p>
+          You have denied the permission for this site to use your location.
+          This can be changed in the website settings which you can usually
+          reach via the button to the left of the URL.
+        </p>
+      </div>
 
-      <button>Let's go!</button>
+      <p class="privacy-note">
+        All data is kept local and will never leave your device.
+      </p>
     </div>
     <script type="module" src="./src/main.ts"></script>
   </body>
