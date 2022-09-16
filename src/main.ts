@@ -1,6 +1,7 @@
 import {loadMapsApi} from './load-maps-api';
 import {GeolocationMarker} from './geolocation-marker';
 import {GeolocationService} from './geolocation-service';
+import tracking from '@ubilabs/ubilabs-tracking';
 
 const infoPanel = document.querySelector('.info') as HTMLElement;
 const button = infoPanel.querySelector('button') as HTMLElement;
@@ -10,11 +11,13 @@ const permissionInfoElements: HTMLElement[] = Array.from(
 
 // vite specific way to get environment-variables (supplied via
 // commandline or a .env file)
-const {GOOGLE_MAPS_API_KEY} = import.meta.env;
+const {GOOGLE_MAPS_API_KEY, VITE_TAG_MANAGER_ID} = import.meta.env;
 
 let mapCenterInitiallyUpdated = false;
 
 async function main() {
+  tracking(VITE_TAG_MANAGER_ID);
+
   const mapsApiPromise = loadMapsApi({key: GOOGLE_MAPS_API_KEY});
   const geolocationService = new GeolocationService();
 
