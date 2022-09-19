@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "deploy": "npm run build && gsutil -m rsync -drc ./dist gs://storage.ubidev.net/deviceorientation-compass-demo"
+    "deploy": "npm run build && gsutil -m rsync -d -r ./dist gs://storage.ubidev.net/deviceorientation-compass-demo"
   },
   "keywords": [],
   "author": "",
