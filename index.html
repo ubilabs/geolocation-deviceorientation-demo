@@ -6,14 +6,41 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+    <meta name="description" content="Device Orientation Demo" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:image"
+      content="https://storage.googleapis.com/storage.ubidev.net/deviceorientation-compass-demo/share.png"
+    />
+    <meta name="twitter:site" content="@ubilabs" />
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Device Orientation Demo" />
+    <!-- replace one live deployement is done -->
+    <meta
+      property="og:image"
+      content="https://storage.googleapis.com/storage.ubidev.net/deviceorientation-compass-demo/share.png"
+    />
+    <meta
+      property="og:url"
+      content="https://storage.googleapis.com/storage.ubidev.net/deviceorientation-compass-demo/index.html"
+    />
+    <meta
+      property="og:description"
+      content="This demo shows how to use the Geolocation- and DeviceOrientation APIs
+      to display a user's location on a google map."
+    />
     <link
       rel="stylesheet"
       href="https://ui-components.ubilabs.com/css/v1/ubilabs-styles.css"
     />
-    <title>compass demo</title>
+    <title>Device Orientation Demo</title>
     <style>
       body {
         margin: 0;
+        width: 100vw;
+        height: 100vh;
       }
       #map {
         width: 100vw;
@@ -32,12 +59,11 @@
       }
       .info {
         position: absolute;
-        bottom: 2em;
-        left: 50%;
+        top: 2em;
+        left: 2em;
         width: 400px;
-        max-width: 80%;
+        max-width: 90%;
         padding: 1.5em 1em;
-        transform: translateX(-50%);
         background: white;
         border-radius: 5px;
         box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
@@ -61,7 +87,6 @@
         height: 18px;
         margin-right: 0.25em;
       }
-
       .permission-info {
         margin-left: -1em;
         margin-right: -1em;
@@ -69,64 +94,88 @@
         padding: 1em;
         background: rgba(0, 0, 0, 0.04);
       }
-
       .privacy-note {
         color: rgba(0, 0, 0, 0.54);
+      }
+
+      @media only screen and (max-width: 600px) {
+        .app {
+          flex-direction: column;
+          height: 100%;
+          display: flex;
+        }
+        #map {
+          width: 100%;
+          height: 100%;
+        }
+        .info {
+          position: initial;
+          background: white;
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        .wordmark-container {
+          top: 5px;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="map"></div>
-    <div class="wordmark-container">
-      made by <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
-    </div>
-    <div class="info">
-      <h1 class="header">
-        <img class="ubi-logo" alt="" src="/ubilabs-logo.svg" />Device
-        Orientation Demo
-      </h1>
-      <p>
-        This demo shows how to use the Geolocation- and DeviceOrientation APIs
-        to display a user's location on a google map.
-      </p>
+    <div class="app">
+      <div id="map"></div>
+      <div class="wordmark-container">
+        made by
+        <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
+      </div>
+      <div class="info">
+        <h1 class="header">
+          <img class="ubi-logo" alt="" src="/ubilabs-logo.svg" />Device
+          Orientation Demo
+        </h1>
+        <p>
+          This demo shows how to use the Geolocation- and DeviceOrientation APIs
+          to display a user's location on a google map.
+        </p>
 
-      <div
-        class="permission-info permission-info--granted"
-        data-state="granted"
-        style="display: none"
-      >
-        <p>
-          You have granted this page permission to access to your location which
-          will now be shown on the map.
-        </p>
-      </div>
-      <div
-        class="permission-info permission-info--prompt"
-        data-state="prompt"
-        style="display: none"
-      >
-        <p>
-          You haven't yet granted the required permission, or we couldn't check
-          if the permission has been granted. Press the button below to start
-          the process.
-        </p>
-        <button>Let's go!</button>
-      </div>
-      <div
-        class="permission-info permission-info--denied"
-        data-state="denied"
-        style="display: none"
-      >
-        <p>
-          You have denied the permission for this site to use your location.
-          This can be changed in the website settings which you can usually
-          reach via the button to the left of the URL.
-        </p>
-      </div>
+        <div
+          class="permission-info permission-info--granted"
+          data-state="granted"
+          style="display: none"
+        >
+          <p>
+            You have granted this page permission to access to your location
+            which will now be shown on the map.
+          </p>
+        </div>
+        <div
+          class="permission-info permission-info--prompt"
+          data-state="prompt"
+          style="display: none"
+        >
+          <p>
+            You haven't yet granted the required permission, or we couldn't
+            check if the permission has been granted. Press the button below to
+            start the process.
+          </p>
+          <button>Let's go!</button>
+        </div>
+        <div
+          class="permission-info permission-info--denied"
+          data-state="denied"
+          style="display: none"
+        >
+          <p>
+            You have denied the permission for this site to use your location.
+            This can be changed in the website settings which you can usually
+            reach via the button to the left of the URL.
+          </p>
+        </div>
 
-      <p class="privacy-note">
-        All data is kept local and will never leave your device.
-      </p>
+        <p class="privacy-note">
+          All data is kept local and will never leave your device.
+        </p>
+      </div>
     </div>
     <script type="module" src="./src/main.ts"></script>
   </body>
