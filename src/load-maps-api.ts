@@ -4,14 +4,12 @@ interface MapsApiOptions {
   v?: string;
 }
 
-declare global {
-  interface Window {
-    __maps_callback__?: () => void;
-  }
-}
-
 let mapsApiLoaded: Promise<void> | null = null;
 
+/**
+ * Loads the Google Maps API javascript and resolves once complete.
+ * @param apiOptions
+ */
 export async function loadMapsApi(apiOptions: MapsApiOptions): Promise<void> {
   if (mapsApiLoaded !== null) {
     return mapsApiLoaded;
@@ -39,4 +37,10 @@ export async function loadMapsApi(apiOptions: MapsApiOptions): Promise<void> {
   });
 
   return mapsApiLoaded;
+}
+
+declare global {
+  interface Window {
+    __maps_callback__?: () => void;
+  }
 }

@@ -1,7 +1,21 @@
+/*
+ * DeviceOrientation Event Specification: https://w3c.github.io/deviceorientation
+ *
+ * Copyright © 2022 World Wide Web Consortium, (Massachusetts Institute of
+ * Technology, European Research Consortium for Informatics and Mathematics,
+ * Keio University, Beihang). All Rights Reserved. This work is distributed
+ * under the W3C® Software and Document License [1] in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * [1] http://www.w3.org/Consortium/Legal/copyright-software
+ */
+
 const degtorad = Math.PI / 180; // Degree-to-Radian conversion
 
 /**
  * Computes the compass-heading from the device-orientation euler-angles.
+ * Source: https://w3c.github.io/deviceorientation/#example-cad08fa0
  */
 export function eulerAnglesToCompassHeading(
   alpha: number | null,

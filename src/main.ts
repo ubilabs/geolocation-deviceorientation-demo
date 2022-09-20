@@ -24,14 +24,15 @@ async function main() {
   await geolocationService.queryPermissionsState();
   updatePermissionStateDetails(geolocationService.geolocationPermissionState);
 
+  // wait for Google Maps API to load before continuing
   await mapsApiPromise;
 
   const marker = new GeolocationMarker();
   const map = await new google.maps.Map(
     document.querySelector('#map') as HTMLElement,
     {
-      center: {lat: 53.55, lng: 10},
-      zoom: 12,
+      center: {lat: 48, lng: 7},
+      zoom: 5,
       gestureHandling: 'greedy',
       disableDefaultUI: true,
       mapId: '3fec513989decfcd'
@@ -46,15 +47,21 @@ async function main() {
   }
 
   geolocationService.addEventListener('update', ev => {
-    marker.position = {lat: ev.detail.latitude, lng: ev.detail.longitude};
-    marker.accuracy = ev.detail.accuracy;
-    marker.heading = ev.detail.compassHeading;
+    const {latitude, longitude, accuracy, compassHeading} = ev.detail;
+    const hasValidLocation = !isNaN(latitude) && !isNaN(longitude);
 
-    if (!mapCenterInitiallyUpdated) {
-      mapCenterInitiallyUpdated = true;
+    marker.accuracy = accuracy;
+    marker.heading = compassHeading;
 
-      map.setCenter(marker.position);
-      map.setZoom(15);
+    if (hasValidLocation) {
+      marker.position = {lat: latitude, lng: longitude};
+
+      if (!mapCenterInitiallyUpdated) {
+        mapCenterInitiallyUpdated = true;
+
+        map.setCenter(marker.position);
+        map.setZoom(15);
+      }
     }
   });
 
