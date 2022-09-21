@@ -46,11 +46,15 @@
         width: 100vw;
         height: 100vh;
       }
-      .wordmark-container {
+      .wordmark-link {
+        color: black;
         font-size: 10px;
         display: flex;
         flex-direction: row;
         margin-top: 1.5em;
+      }
+      .wordmark-link:hover {
+        text-decoration: none;
       }
       .ubi-wordmark {
         height: 1.3em;
@@ -167,10 +171,10 @@
         <p class="privacy-note">
           All data is kept local and will never leave your device.
         </p>
-        <div class="wordmark-container">
+        <a href="https://ubilabs.com/" target="_blank" class="wordmark-link">
           made by
           <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
-        </div>
+        </a>
       </div>
     </div>
     <script type="module" src="./src/main.ts"></script>
