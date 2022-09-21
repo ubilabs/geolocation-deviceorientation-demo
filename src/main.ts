@@ -35,7 +35,7 @@ async function main() {
       zoom: 5,
       gestureHandling: 'greedy',
       disableDefaultUI: true,
-      mapId: '3fec513989decfcd'
+      mapId: '5a6c9b4167f21994'
     }
   );
 
