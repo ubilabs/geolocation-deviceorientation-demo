@@ -46,16 +46,19 @@
         width: 100vw;
         height: 100vh;
       }
-      .wordmark-container {
-        position: absolute;
-        bottom: 30px;
-        left: 10px;
+      .wordmark-link {
+        color: black;
         font-size: 10px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        margin-top: 1.5em;
+      }
+      .wordmark-link:hover {
+        text-decoration: none;
       }
       .ubi-wordmark {
         height: 1.3em;
+        padding-left: 0.5em;
       }
       .info {
         position: absolute;
@@ -63,7 +66,7 @@
         left: 2em;
         width: 400px;
         max-width: 90%;
-        padding: 1.5em 1em;
+        padding: 2em 1.5em;
         background: white;
         border-radius: 5px;
         box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
@@ -88,10 +91,10 @@
         margin-right: 0.25em;
       }
       .permission-info {
-        margin-left: -1em;
-        margin-right: -1em;
+        margin-left: -1.5em;
+        margin-right: -1.5em;
         margin-bottom: 1em;
-        padding: 1em;
+        padding: 1.5em;
         background: rgba(0, 0, 0, 0.04);
       }
       .privacy-note {
@@ -124,15 +127,8 @@
   <body>
     <div class="app">
       <div id="map"></div>
-      <div class="wordmark-container">
-        made by
-        <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
-      </div>
       <div class="info">
-        <h1 class="header">
-          <img class="ubi-logo" alt="" src="/ubilabs-logo.svg" />Device
-          Orientation Demo
-        </h1>
+        <h1 class="header">Device Orientation Demo</h1>
         <p>
           This demo shows how to use the Geolocation- and DeviceOrientation APIs
           to display a user's location on a google map.
@@ -175,6 +171,10 @@
         <p class="privacy-note">
           All data is kept local and will never leave your device.
         </p>
+        <a href="https://ubilabs.com/" target="_blank" class="wordmark-link">
+          made by
+          <img src="/ubi-wordmark.svg" class="ubi-wordmark" alt="ubilabs" />
+        </a>
       </div>
     </div>
     <script type="module" src="./src/main.ts"></script>
