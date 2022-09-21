@@ -7,8 +7,8 @@
     "start": "vite",
     "build": "vite build",
     "deploy:dev": "npm run build && gsutil -m rsync -d -r ./dist gs://storage.ubidev.net/deviceorientation-compass-demo && npm run gcs-cache",
-    "deploy:prod": "npm run build && gsutil -m rsync -d -r ./dist gs://demos.ubilabs.net/device-orientation && npm run gcs-cache",
-    "gcs-cache": "gsutil -m setmeta -r -h \"Cache-Control:no-cache\" gs://demos.ubilabs.net/device-orientation"
+    "deploy:prod": "npm run build && gsutil -m rsync -d -r ./dist gs://demos.ubilabs.net/device-orientation",
+    "gcs-cache": "gsutil -m setmeta -r -h \"Cache-Control:no-cache\" gs://storage.ubidev.net/deviceorientation-compass-demo"
   },
   "keywords": [],
   "author": "",
