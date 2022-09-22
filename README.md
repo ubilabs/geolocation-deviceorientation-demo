@@ -23,7 +23,7 @@ Add a .env file with the content:
 
 ```
 GOOGLE_MAPS_API_KEY=key
-VITE_TAG_MANAGER_ID=key
+VITE_TAG_MANAGER_ID=key // internal use only
 ```
 
 Start dev server with
@@ -32,18 +32,12 @@ Start dev server with
 npm start
 ```
 
-## Staging Deployment
+Runs on http://localhost:5173/
 
-```
-npm run deploy:dev
-```
+## Contributing
 
-Builds and deploys to the staging environment: https://storage.googleapis.com/storage.ubidev.net/deviceorientation-compass-demo/index.html
+This repository is public for demonstration purposes. It is not actively developed or maintained. It is therefore closed for controbutions.
 
-## Live Deployment
+## License
 
-```
-npm run deploy:prod
-```
-
-Builds and deploys to the live environment: https://demos.ubilabs.net/device-orientation/index.html
+See [LICENSE.md](LICENSE.md)
