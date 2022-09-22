@@ -36,7 +36,7 @@ Runs on http://localhost:5173/
 
 ## Contributing
 
-This repository is public for demonstration purposes. It is not actively developed or maintained. It is therefore closed for controbutions.
+This repository is public for demonstration purposes. It is not actively developed or maintained. It is therefore closed for contributions.
 
 ## License
 
