@@ -41,6 +41,8 @@
         margin: 0;
         width: 100vw;
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        padding-bottom: env(safe-area-inset-bottom);
       }
       #map {
         width: 100vw;
