@@ -41,6 +41,8 @@
         margin: 0;
         width: 100vw;
         height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        padding-bottom: env(safe-area-inset-bottom);
       }
       #map {
         width: 100vw;
@@ -55,6 +57,7 @@
         width: fit-content;
         align-items: baseline;
         align-self: flex-end;
+        white-space: nowrap;
       }
       .wordmark-link:hover {
         text-decoration: none;
@@ -117,6 +120,7 @@
         .info {
           position: initial;
           background: white;
+          width: 100%;
           max-width: 100%;
           display: flex;
           flex-direction: column;
